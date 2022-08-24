@@ -3,6 +3,7 @@ import MobileInputManager
 import VariableManager
 import MasterDataRecorder
 
+
 VariableManager.init_vars()
 rospy.init_node("Master")
 rate = rospy.Rate(10)

@@ -5,6 +5,7 @@ import MasterDataRecorder
 import RecordingPlayer
 
 def play_active_mode():
+    global mode
     if(mode != VariableManager.active_mode):
         recording_player.stop_playing()
 

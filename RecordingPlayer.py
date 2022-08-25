@@ -32,10 +32,10 @@ class RecordingPlayer :
         elif(self.active_pointer > 1 and not self.playing_forward):
             self.active_pointer -= 1
 
-        if(self.active_pointer == 0):
+        if(self.active_pointer == 1):
             self.playing_forward = True
-        elif(self.active_pointer == len(self.recording) - 1):
-            self.playing_forward == False
+        elif(self.active_pointer == len(self.recording) - 2):
+            self.playing_forward = False
 
     def main(self):
         if(self.recording == None):
@@ -44,6 +44,5 @@ class RecordingPlayer :
             return
 
         VariableManager.master_data = self.recording[self.active_pointer]
-        
         self.update_counter()
 

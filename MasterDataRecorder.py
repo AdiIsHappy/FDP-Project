@@ -18,7 +18,6 @@ class MasterRecorder:
             self.record_data()
         
     def clear_recorded_data(self):
-        print("clearing")
         self.file = open("recorded_data.txt", "w")
         self.file.write("")
         self.file.close()
@@ -29,7 +28,6 @@ class MasterRecorder:
         except:
             self.file = open("recorded_data.txt", "w")
         self.data_to_write = VariableManager.master_data
-        print("recording : " + f"{self.data_to_write.x},{self.data_to_write.y},{self.data_to_write.z}")
         self.file.write(f"{self.data_to_write.x},{self.data_to_write.y},{self.data_to_write.z}\n")
         self.file.close()
         

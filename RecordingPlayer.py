@@ -11,15 +11,17 @@ class RecordingPlayer :
 
     def load_recording(self):
         with open("recorded_data.txt", "r") as f:
+            d = f.readlines()
             data = [
                 Point(
                     float(i.split(",")[0]),
-                    float(i.split(",")[0]),
-                    float(i.split(",")[0]))
-                for i in f.readlines()]
+                    float(i.split(",")[1]),
+                    float(i.split(",")[2]))
+                for i in d]
         self.recording = data
         self.active_pointer = 0
         self.playing_forward = True
+    
     
     def stop_playing(self):
         self.recording = None
@@ -42,7 +44,6 @@ class RecordingPlayer :
             self.load_recording()
         if(len(self.recording) == 0 ):
             return
-
         VariableManager.master_data = self.recording[self.active_pointer]
         self.update_counter()
 

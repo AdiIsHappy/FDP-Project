@@ -12,6 +12,7 @@ class MobileManager:
         self.create_subscribers()
         
     def init_vars(self):
+        self.stop_distance = 20
         self.joystick = [0,0]
         self.speed_add_factor = 0
         self.recording = False
@@ -78,8 +79,19 @@ class MobileManager:
                 self.mode = [1,0,0]
 
     def main(self):
-        VariableManager.motion_data["JoyStick"] = self.joystick
-        t = VariableManager.motion_data["Speed"]
+        VariableManager.recording = self.recording
+        VariableManager.active_mode = self.mode
+
+    def update_master_data(self):
+        if(VariableManager.sensor_data["uSFront"] < 20 and self.joystick.linear.y == 1):
+            self.joystick.linear.y = 0
+        if(VariableManager.sensor_data["uSBack"] < 20 and self.joystick.linear.y == -1):
+            self.joystick.linear.y = 0
+        # VariableManager.motion_data["JoyStick"] = self.joystick
+        VariableManager.master_data.x = self.joystick[0]
+        VariableManager.master_data.y = self.joystick[1]
+        # t = VariableManager.motion_data["Speed"]
+        t = VariableManager.master_data.z
         t += self.speed_add_factor
         self.speed_add_factor = 0
         if(t >= 1): 
@@ -87,9 +99,8 @@ class MobileManager:
         elif (t<= 0.3):
             t = 0.3
         t = round(t,2)
-        VariableManager.motion_data["Speed"] = t
-        VariableManager.recording = self.recording
-        VariableManager.active_mode = self.mode
+        # VariableManager.motion_data["Speed"] = t
+        VariableManager.master_data.z = t
 
 
 

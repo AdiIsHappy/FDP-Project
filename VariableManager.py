@@ -6,7 +6,7 @@ def init_vars():
     sensor_data = {"iRLeft":0,
                 "iRRight":0,
                 "uSBack":1000,
-                "usFront":1000,
+                "uSFront":1000,
                 }
     master_data = Point(0,0,1)
     motion_data = {

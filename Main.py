@@ -21,9 +21,9 @@ def play_active_mode():
 mode = None
 VariableManager.init_vars()
 rospy.init_node("Master")
-rate = rospy.Rate(10)
+rate = rospy.Rate(20)
 
-master_publisher = rospy.Publisher("master_data", Point, queue_size=10)
+master_publisher = rospy.Publisher("master_data", Point, queue_size=1)
 master_recorder = MasterDataRecorder.MasterRecorder()
 line_follower = LineFollower.LineFollower()
 mob_manager = MobileInputManager.MobileManager()

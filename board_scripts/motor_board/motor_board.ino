@@ -1,15 +1,7 @@
 #include <ESP8266WiFi.h>
 #include <ros.h>
-#include <SensorData/sensorData.h>
+#include <geometry_msgs/Point.h>
 
-int front_us_echo = D1;
-int back_us_echo = D2;
-int front_us_trig = D3;
-int back_us_trig = D4;
-int left_ir_input = D6;
-int right_ir_input = D7;
-long duration;
-int distance;
 
 // college 2.4Ghz wifi Setup
 // const char *ssid =  "IITMandi_2.4GHz";
@@ -71,40 +63,28 @@ void ConnectToWifi() {
   Serial.println("WiFi connected");
 }
 
-SensorData::sensorData sensor_data;
-ros::Publisher sensor_data_publisher("sensor_data", &sensor_data);
+geometry_msgs::Point input;
 
-int disance_from_us(int trigPin,int echoPin){
-  digitalWrite(trigPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(trigPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance = duration * 0.034 / 2; 
-  return distance;
+void master_data(const geometry_msgs::Point& data){
+  input = data;
 }
+ros::Subscriber<geometry_msgs::Point> sub("master_data", &master_data);
+
 
 void setup() {
   Serial.begin(9600);
   ConnectToWifi();
   nh.initNode();
-  nh.advertise(sensor_data_publisher);
-  pinMode(front_us_echo, INPUT);
-  pinMode(front_us_trig, OUTPUT);
-  pinMode(back_us_echo, INPUT);
-  pinMode(back_us_trig, OUTPUT);
-  pinMode(left_ir_input, INPUT);
-  pinMode(right_ir_input, INPUT);
+  nh.subscribe(sub);
 }
 
 
 void loop(){
-  sensor_data.frontUS = disance_from_us(front_us_trig, front_us_echo);
-  sensor_data.backUS = disance_from_us(back_us_trig, back_us_echo);
-  sensor_data.leftIR = digitalRead(left_ir_input);
-  sensor_data.rightIR = digitalRead(right_ir_input);
-  sensor_data_publisher.publish(&sensor_data);  
+  Serial.print(input.x);
+  Serial.print(" ");
+  Serial.print(input.y);
+  Serial.print(" ");
+  Serial.println(input.z);
   nh.spinOnce();  
 }
 

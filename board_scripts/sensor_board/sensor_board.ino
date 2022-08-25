@@ -102,7 +102,6 @@ void setup() {
 
 void loop(){
   sensor_data.frontUS = disance_from_us(front_us_trig, front_us_echo);
-  Serial.println(sensor_data.frontUS);
   sensor_data.backUS = disance_from_us(back_us_trig, back_us_echo);
   sensor_data.leftIR = digitalRead(left_ir_input);
   sensor_data.rightIR = digitalRead(right_ir_input);

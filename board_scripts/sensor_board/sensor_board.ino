@@ -19,7 +19,8 @@ int distance;
 //Aditya's phone hotspot Setup
 const char *ssid = "adi";
 const char *pass = "GoodToGo";
-IPAddress server(192, 168, 156, 72);
+IPAddress server(192, 168, 219, 72);
+
 
 // client used to connect to wifi
 WiFiClient client;
@@ -32,7 +33,7 @@ public:
 
   void init() {
     // do your initialization here. this probably includes TCP server/client setup
-    client.connect(server, 11411);
+    client.connect(server, 11511);
   }
 
   // read a byte from the serial port. -1 = failure

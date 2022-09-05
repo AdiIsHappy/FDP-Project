@@ -35,7 +35,7 @@ while (not rospy.is_shutdown()):
     master_recorder.main()
     mob_manager.main()
     play_active_mode()
-    VariableManager.print_vars()
+    # VariableManager.print_vars()
     rate.sleep()
     master_publisher.publish(VariableManager.master_data)
 

@@ -16,6 +16,7 @@ class LineFollower:
     def main(self):
         lir = VariableManager.sensor_data["iRLeft"]
         rir = VariableManager.sensor_data["iRRight"]
+        # print(lir)
         if( lir == self.high and rir == self.high):
             self.motion_data = self.stop
         elif(lir != self.high and rir == self.high):

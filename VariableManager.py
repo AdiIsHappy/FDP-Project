@@ -15,7 +15,9 @@ def init_vars():
                     }
     active_mode = [1,0,0]
     recording = False
-
+def reset_master():
+    master_data = Point(0,0,1)
+    
 def print_vars():
     print(sensor_data)
     print(master_data)

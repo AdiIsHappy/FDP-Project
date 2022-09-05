@@ -83,10 +83,11 @@ class MobileManager:
         VariableManager.active_mode = self.mode
 
     def update_master_data(self):
-        if(VariableManager.sensor_data["uSFront"] < 20 and self.joystick.linear.y == 1):
-            self.joystick.linear.y = 0
-        if(VariableManager.sensor_data["uSBack"] < 20 and self.joystick.linear.y == -1):
-            self.joystick.linear.y = 0
+        
+        if(VariableManager.sensor_data["uSFront"] < 20 and self.joystick[1] == 1):
+            self.joystick[1] = 0
+        if(VariableManager.sensor_data["uSBack"] < 20 and self.joystick[1] == -1):
+            self.joystick[1] = 0
         # VariableManager.motion_data["JoyStick"] = self.joystick
         VariableManager.master_data.x = self.joystick[0]
         VariableManager.master_data.y = self.joystick[1]

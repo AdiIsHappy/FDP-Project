@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h>
+
 #include <ros.h>
 #include <geometry_msgs/Point.h>
 
@@ -8,17 +8,27 @@
 // IPAddress server(10, 8, 38, 114);
 // const char *pass =  "wifi@iit";
 
+int enA = D2;
+int in1 = D3;
+int in2 = D4;
+int in3 = D5;
+int in4 = D6;
+int enB = D7;
+
+
+void moveForwad();
+const int max_speed = 254;
+
 //Aditya's phone hotspot Setup
 const char *ssid = "adi";
 const char *pass = "GoodToGo";
-IPAddress server(192, 168, 156, 72);
+IPAddress server(192, 168, 219, 72);
 
 // client used to connect to wifi
 WiFiClient client;
 
 // this is hardware class
 class WiFiHardware {
-
 public:
   WiFiHardware(){};
 
@@ -76,19 +86,121 @@ void setup() {
   ConnectToWifi();
   nh.initNode();
   nh.subscribe(sub);
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
 }
 
 
 void loop(){
-  Serial.print(input.x);
-  Serial.print(" ");
-  Serial.print(input.y);
-  Serial.print(" ");
-  Serial.println(input.z);
-  nh.spinOnce();  
+  // Serial.print(input.x);
+  // Serial.print(" ");
+  // Serial.print(input.y);
+  // Serial.print(" ");
+  // Serial.println(input.z);
+  Serial.println(input.x == 0 && input.y == 1);
+  if      (input.x == 0 && input.y == 1){forward();}
+  else if (input.x == 1 && input.y == 1){left();}
+  else if (input.x == 1 && input.y == 0){turnLeft();}
+  else if (input.x == 1 && input.y == -1){backRight();}
+  else if (input.x == 0 && input.y == -1){backward();}
+  else if (input.x == -1 && input.y == -1){backLeft();}
+  else if (input.x == -1 && input.y == 0){turnRight();}
+  else if (input.x == -1 && input.y == 1){right();}
+  else {stop();}
+  nh.spinOnce();    
+}
+//   \  |  /
+//    \ | /
+//     \|/ 
+// <--------->
+//     /|\
+//    / | \
+//   /  |  \  
+    
+void forward(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+void left(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+
+void right(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+void backward(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
+
+void turnRight(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+
+void turnLeft(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
 }
 
 
+void backLeft(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
 
+void backRight(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+
+void stop(){
+  analogWrite(enA, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);  
+}
 
 

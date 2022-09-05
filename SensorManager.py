@@ -9,7 +9,8 @@ class SensorManager:
                             "uSBack":1000,
                             "uSFront":1000,
                             }
-        self.subscriber = rospy.Subscriber("sensor_manager", sensorData, self.recive_sensor_data)
+        self.subscriber = rospy.Subscriber("sensor_data", sensorData, self.recive_sensor_data)
+        print("subscirbed")
     
     def recive_sensor_data(self,data):
         self.recived_data["iRLeft"] = data.leftIR

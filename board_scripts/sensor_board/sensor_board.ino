@@ -2,8 +2,9 @@
 #include <ros.h>
 #include <SensorData/sensorData.h>
 
-int front_us_echo = D1;
+
 int back_us_echo = D2;
+int front_us_echo = D1;
 int front_us_trig = D3;
 int back_us_trig = D4;
 int left_ir_input = D6;
@@ -33,7 +34,7 @@ public:
 
   void init() {
     // do your initialization here. this probably includes TCP server/client setup
-    client.connect(server, 11511);
+    client.connect(server, 11411);
   }
 
   // read a byte from the serial port. -1 = failure

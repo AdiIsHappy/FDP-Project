@@ -1,4 +1,4 @@
-
+#include <ESP8266WiFi.h>
 #include <ros.h>
 #include <geometry_msgs/Point.h>
 

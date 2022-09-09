@@ -1,0 +1,13 @@
+Terminal 1 :
+roscore;
+
+Terminal 2:
+cd ~/Documents/FDP\ Project/; source devel/setup.bash; python3 scripts/Main.py
+
+Terminal 3:
+cd ~/Documents/FDP\ Project/; source devel/setup.bash; python3 scripts/serial\ nodes/serial_node2.py tcp2;
+
+Terminal 4:
+cd ~/Documents/FDP\ Project/; source devel/setup.bash; python3 scripts/serial\ nodes/serial_node.py tcp __name:=senNode;
+
+

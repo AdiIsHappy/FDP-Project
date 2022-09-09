@@ -34,7 +34,7 @@ public:
 
   void init() {
     // do your initialization here. this probably includes TCP server/client setup
-    client.connect(server, 11411);
+    client.connect(server, 11511);
   }
 
   // read a byte from the serial port. -1 = failure

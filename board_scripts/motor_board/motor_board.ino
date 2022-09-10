@@ -16,7 +16,6 @@ int in4 = D6;
 int enB = D7;
 
 
-void moveForwad();
 const int max_speed = 254;
 
 //Aditya's phone hotspot Setup

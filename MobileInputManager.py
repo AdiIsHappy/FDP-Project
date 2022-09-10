@@ -35,7 +35,7 @@ class MobileManager:
             -1 if data.linear.y < -0.4 else (0 if data.linear.y < 0.4 else 1),
             ]
         
-    
+
     def callback_speed_up(self, data):
         if(data.data == True):
             self.speed_add_factor += MobileManager.ACCLERATION

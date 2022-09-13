@@ -44,10 +44,16 @@ class RecordingPlayer :
             self.load_recording()
         if(len(self.recording) == 0 ):
             return
-        VariableManager.master_data = Point(self.recording[self.active_pointer].x * self.playing_forward,
-                                            self.recording[self.active_pointer].y * self.playing_forward,
-                                            self.recording[self.active_pointer].z 
-                                            )
+        if(self.recording[self.active_pointer].y != 0):
+            VariableManager.master_data = Point(self.recording[self.active_pointer].x ,
+                                                self.recording[self.active_pointer].y * self.playing_forward,
+                                                self.recording[self.active_pointer].z 
+                                                )
+        else :
+                        VariableManager.master_data = Point(self.recording[self.active_pointer].x * self.playing_forward,
+                                                self.recording[self.active_pointer].y * self.playing_forward,
+                                                self.recording[self.active_pointer].z 
+                                                )
         print(VariableManager.master_data)
         self.update_counter()
 

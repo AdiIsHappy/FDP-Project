@@ -18,9 +18,9 @@ int distance;
 // const char *pass =  "wifi@iit";
 
 //Aditya's phone hotspot Setup
-const char *ssid = "adi";
-const char *pass = "GoodToGo";
-IPAddress server(192, 168, 219, 72);
+const char *ssid = "SAIKUMAR";
+const char *pass = "ucanopen";
+IPAddress server(192, 168, 244, 179);
 
 
 // client used to connect to wifi

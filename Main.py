@@ -21,7 +21,7 @@ def play_active_mode():
 mode = None
 VariableManager.init_vars()
 rospy.init_node("Master")
-rate = rospy.Rate(20)
+rate = rospy.Rate(30)
 
 master_publisher = rospy.Publisher("master_data", Point, queue_size=1)
 master_recorder = MasterDataRecorder.MasterRecorder()
@@ -35,7 +35,6 @@ while (not rospy.is_shutdown()):
     master_recorder.main()
     mob_manager.main()
     play_active_mode()
-    # VariableManager.print_vars()
-    rate.sleep()
+    VariableManager.print_vars()
     master_publisher.publish(VariableManager.master_data)
-
+    rate.sleep()

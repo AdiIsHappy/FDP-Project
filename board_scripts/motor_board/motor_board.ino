@@ -9,19 +9,19 @@
 // const char *pass =  "wifi@iit";
 
 int enA = D2;
-int in1 = D3;
-int in2 = D4;
-int in3 = D5;
-int in4 = D6;
+int in2 = D3;
+int in1 = D4;
+int in4 = D5;
+int in3 = D6;
 int enB = D7;
 
 
 const int max_speed = 254;
 
 //Aditya's phone hotspot Setup
-const char *ssid = "adi";
-const char *pass = "GoodToGo";
-IPAddress server(192, 168, 219, 72);
+const char *ssid = "SAIKUMAR";
+const char *pass = "ucanopen";
+IPAddress server(192, 168, 244, 179);
 
 // client used to connect to wifi
 WiFiClient client;
@@ -131,17 +131,17 @@ void forward(){
 
 void left(){
   analogWrite(enA, max_speed * input.z);
-  analogWrite(enB, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z/2);
   digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
-  digitalWrite(in3, LOW);
+  digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
 }
 
 void right(){
-  analogWrite(enA, max_speed * input.z);
+  analogWrite(enA, max_speed * input.z/2);
   analogWrite(enB, max_speed * input.z);
-  digitalWrite(in1, LOW);
+  digitalWrite(in1, HIGH);
   digitalWrite(in2, LOW);
   digitalWrite(in3, HIGH);
   digitalWrite(in4, LOW);
@@ -176,21 +176,21 @@ void turnLeft(){
 
 
 void backLeft(){
-  analogWrite(enA, max_speed * input.z);
+  analogWrite(enA, max_speed * input.z/2);
   analogWrite(enB, max_speed * input.z);
   digitalWrite(in1, LOW);
-  digitalWrite(in2, LOW);
+  digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
 }
 
 void backRight(){
   analogWrite(enA, max_speed * input.z);
-  analogWrite(enB, max_speed * input.z);
+  analogWrite(enB, max_speed * input.z/2);
   digitalWrite(in1, LOW);
   digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
-  digitalWrite(in4, LOW);
+  digitalWrite(in4, HIGH);
 }
 
 void stop(){

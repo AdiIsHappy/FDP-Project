@@ -97,8 +97,8 @@ class MobileManager:
         self.speed_add_factor = 0
         if(t >= 1): 
             t = 1
-        elif (t<= 0.3):
-            t = 0.3
+        elif (t<= 0.6):
+            t = 0.6
         t = round(t,2)
         # VariableManager.motion_data["Speed"] = t
         VariableManager.master_data.z = t
